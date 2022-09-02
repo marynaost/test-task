@@ -56,7 +56,6 @@ export default function App() {
     users.sort((a, b) => b.name.localeCompare(a.name))
   }
   const usersFiltered = filteredUsers()
-  console.log(usersFiltered)
 
   return (
     <Wrap>
