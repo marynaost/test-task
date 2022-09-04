@@ -23,6 +23,7 @@ const Input = styled.input`
   font-family: inherit;
   color: #eee;
   border: none;
+  cursor: pointer;
   &::placeholder {
     color: #eee;
   }

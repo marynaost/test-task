@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import UserCardItem from './UserCardItem'
 
 export default function UserCard({
@@ -6,24 +7,17 @@ export default function UserCard({
   lastContentIndex,
   users,
 }) {
-  const handleClick = e => {
-    if (e.target.nodeName !== 'BUTTON') {
-      return
-    }
-    document.querySelector('#list').classList.toggle('list')
-  }
-
   return (
     <>
       {users && (
-        <UsersWrap id="wrap">
-          <ListUsers onClick={handleClick} id="list">
+        <UsersWrap>
+          <ListUsers>
             {users
               .slice(firstContentIndex, lastContentIndex)
               .map(({ id, name, email, phone }) => (
                 <UserCardItem
                   key={id}
-                  ID={id}
+                  id={id}
                   name={name}
                   email={email}
                   phone={phone}
@@ -38,23 +32,23 @@ export default function UserCard({
 
 const UsersWrap = styled.div`
   position: relative;
-
-  .list {
-    margin-right: auto;
-    margin-left: 0;
-    padding-top: 30px;
-  }
 `
 
 const ListUsers = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
   justify-content: space-between;
-  @media screen and (min-width: 1000px) {
+  width: 300px;
+  @media screen and (min-width: 768px) {
     width: 450px;
   }
+
   @media screen and (min-width: 1500px) {
     width: 570px;
   }
 `
+UserCardItem.propTypes = {
+  firstContentIndex: PropTypes.number,
+  lastContentIndex: PropTypes.number,
+  users: PropTypes.array,
+}

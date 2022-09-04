@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 export default function ShowPostItem({ post }) {
   const [showText, setShowText] = useState(false)
@@ -54,3 +55,6 @@ const Text = styled.p`
     font-size: 18px;
   }
 `
+ShowPostItem.propTypes = {
+  post: PropTypes.object.isRequired,
+}

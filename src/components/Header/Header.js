@@ -4,7 +4,7 @@ import Filter from 'components/Filter/Filter'
 export default function Header({ changesort, filter, changeFilter, ...props }) {
   return (
     <HeaderEl {...props}>
-      <p onClick={changesort}>Sort </p>
+      <Text onClick={changesort}>Sort </Text>
       <Filter search={filter} onChange={changeFilter} />
     </HeaderEl>
   )
@@ -15,4 +15,10 @@ const HeaderEl = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`
+const Text = styled.p`
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `

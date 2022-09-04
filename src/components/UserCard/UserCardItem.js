@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import { nanoid } from 'nanoid'
+import PropTypes from 'prop-types'
 import * as API from 'services/api'
 import ShowPost from 'components/ShowPost'
 
-export default function UserCardItem({ ID: id, name, email, phone, onClick }) {
+export default function UserCardItem({ id, name, email, phone }) {
   const [userPost, setUserPost] = useState([])
   const [showPost, setShowPost] = useState(false)
 
   useEffect(() => {
     API.fetchUserPost(id)
-      .then(res => setUserPost(res))
+      .then(res => {
+        setUserPost(res)
+      })
       .catch(err => console.log(err))
   }, [id])
 
@@ -20,7 +22,7 @@ export default function UserCardItem({ ID: id, name, email, phone, onClick }) {
 
   return (
     <>
-      <Card onClick={onClick}>
+      <Card>
         <p>{name}</p>
         <p>{email}</p>
         <p>{phone.split(' ')[0]}</p>
@@ -28,15 +30,15 @@ export default function UserCardItem({ ID: id, name, email, phone, onClick }) {
         <Button type="button" onClick={handleClick}>
           {showPost ? 'Hide posts' : 'Show all posts '}
         </Button>
+        {showPost && <ShowPost data={userPost} />}
       </Card>
-      {showPost && <ShowPost data={userPost} />}
     </>
   )
 }
 
 const Card = styled.li`
-  width: 420px;
-  height: 370px;
+  width: 250px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,15 +48,19 @@ const Card = styled.li`
   &:not(:nth-last-child(-n + 2)) {
     margin-bottom: 30px;
   }
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
+    width: 220px;
+    height: 220px;
+  }
+  @media screen and (min-width: 1000px) {
     width: 220px;
     height: 240px;
   }
 
   @media screen and (min-width: 1500px) {
     width: 270px;
-    height: 265px;
+    height: 220px;
     font-size: 18px;
   }
 `
@@ -68,8 +74,15 @@ const Button = styled.button`
   color: inherit;
   margin: 0 auto;
   margin-top: 30px;
+  cursor: pointer;
 
   @media screen and (min-width: 1000px) {
     padding: 16px 15px;
   }
 `
+UserCardItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+}

@@ -4,15 +4,16 @@ import * as API from 'services/api'
 import Header from 'components/Header/Header'
 import UserCard from 'components/UserCard/UserCard'
 import usePagination from 'hooks/usePagination'
+import Icon from 'components/Icon'
 import 'modern-normalize/modern-normalize.css'
 import './App.css'
 import './index.css'
 
 export default function App() {
   const [users, setUsers] = useState([])
-  const [showPost, setShowPost] = useState(false)
   const [filter, setFilter] = useState('')
   const [sort, setSort] = useState(false)
+
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, setPage } =
     usePagination({
       contentPerPage: 4,
@@ -38,13 +39,6 @@ export default function App() {
       user.name.toLowerCase().includes(normalizedFilter),
     )
   }
-  // const sortedUsers = () => {
-  //   return [...users].sort((a, b) => a.name.localeCompare(b.name))
-  // }
-
-  const handleClick = () => {
-    setShowPost(!showPost)
-  }
 
   const changeSort = () => {
     setSort(!sort)
@@ -68,8 +62,6 @@ export default function App() {
       {usersFiltered.length > 0 ? (
         <UserCard
           users={usersFiltered}
-          onClick={handleClick}
-          showPost={showPost}
           firstContentIndex={firstContentIndex}
           lastContentIndex={lastContentIndex}
         />
@@ -77,22 +69,44 @@ export default function App() {
         <div>Sorry, users not found</div>
       )}
 
-      <Prev>
-        <div onClick={prevPage}>Previous</div>
+      <Navigation>
+        <div onClick={prevPage} className="page">
+          <Icon
+            style={{ marginRight: '30px' }}
+            width="18px"
+            height="36px"
+            stroke="#eee"
+            fill="transparent"
+            iconName="icon-prev"
+          />
+          Previous
+        </div>
 
         <div onClick={nextPage} className="page">
           Next
+          <Icon
+            style={{ marginLeft: '30px' }}
+            width="18px"
+            height="36px"
+            stroke="#eee"
+            fill="transparent"
+            iconName="icon-next"
+          />
         </div>
-      </Prev>
+      </Navigation>
     </Wrap>
   )
 }
 
 const Wrap = styled.div`
-  width: 1000px;
-  padding: 50px 0px;
+  width: 350px;
+  padding-top: 50px;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
 
   @media screen and (min-width: 1000px) {
     width: 1000px;
@@ -109,12 +123,27 @@ const Wrap = styled.div`
   }
 `
 
-const Prev = styled.div`
+const Navigation = styled.div`
   position: fixed;
-  bottom: 70px;
+  bottom: 50px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  width: 1000px;
+  width: 350px;
+
+  .page {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 1000px;
+  }
 
   @media screen and (min-width: 1500px) {
     width: 1470px;
