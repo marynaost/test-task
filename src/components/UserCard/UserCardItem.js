@@ -4,7 +4,14 @@ import PropTypes from 'prop-types'
 import * as API from 'services/api'
 // import ShowPost from 'components/ShowPost'
 
-export default function UserCardItem({ id, name, email, phone, onChange }) {
+export default function UserCardItem({
+  id,
+  name,
+  email,
+  phone,
+  website,
+  onChange,
+}) {
   const [userPost, setUserPost] = useState([])
   const [showPost, setShowPost] = useState(false)
 
@@ -27,7 +34,7 @@ export default function UserCardItem({ id, name, email, phone, onChange }) {
         <p>{name}</p>
         <p>{email}</p>
         <p>{phone.split(' ')[0]}</p>
-        <p>{phone.split(' ')[1]}</p>
+        <p>{website}</p>
         <Button
           type="button"
           onClick={async () => {

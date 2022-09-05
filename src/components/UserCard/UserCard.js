@@ -29,13 +29,14 @@ export default function UserCard({
           <ListUsers>
             {users
               .slice(firstContentIndex, lastContentIndex)
-              .map(({ id, name, email, phone }) => (
+              .map(({ id, name, email, phone, website }) => (
                 <UserCardItem
                   key={id}
                   id={id}
                   name={name}
                   email={email}
                   phone={phone}
+                  website={website}
                   onChange={handleChange}
                 />
               ))}
