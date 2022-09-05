@@ -7,9 +7,7 @@ export default function ShowPostItem({ post }) {
   return (
     <>
       <Post>
-        <Title key={post.title} onClick={() => setShowText(!showText)}>
-          {post.title}
-        </Title>
+        <Title onClick={() => setShowText(!showText)}>{post.title}</Title>
         {showText ? <Text key={post.body}>{post.body}</Text> : null}
       </Post>
     </>

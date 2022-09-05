@@ -57,7 +57,7 @@ export default function App() {
         className="header"
         changeFilter={changeFilter}
         filter={filter}
-        changesort={changeSort}
+        changeSort={changeSort}
       />
       {usersFiltered.length > 0 ? (
         <UserCard

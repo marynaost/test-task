@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import ShowPostItem from './ShowPostItem'
 
@@ -9,7 +8,7 @@ export default function ShowPost({ data, ...props }) {
         <Wrap>
           <PostsList {...props}>
             {data.map(post => (
-              <ShowPostItem key={nanoid()} post={post} />
+              <ShowPostItem key={post.id} post={post} />
             ))}
           </PostsList>
         </Wrap>

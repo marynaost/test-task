@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import Filter from 'components/filter/Filter'
 
-export default function Header({ changesort, filter, changeFilter, ...props }) {
+export default function Header({ changeSort, filter, changeFilter, ...props }) {
   return (
     <HeaderEl {...props}>
-      <Text onClick={changesort}>Sort </Text>
+      <Text onClick={changeSort}>Sort </Text>
       <Filter search={filter} onChange={changeFilter} />
     </HeaderEl>
   )
