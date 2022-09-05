@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Filter from 'components/Filter/Filter'
+import Filter from 'components/filter/Filter'
 
 export default function Header({ changesort, filter, changeFilter, ...props }) {
   return (

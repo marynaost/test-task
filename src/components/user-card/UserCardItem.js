@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import * as API from 'services/api'
-// import ShowPost from 'components/ShowPost'
 
 export default function UserCardItem({
   id,
@@ -25,7 +24,6 @@ export default function UserCardItem({
 
   const handleClick = () => {
     setShowPost(!showPost)
-    // onChange(showPost, userPost)
   }
 
   return (
@@ -37,14 +35,13 @@ export default function UserCardItem({
         <p>{website}</p>
         <Button
           type="button"
-          onClick={async () => {
+          onClick={() => {
             handleClick()
             onChange(!showPost, userPost)
           }}
         >
           {showPost ? 'Hide posts' : 'Show all posts '}
         </Button>
-        {/* {showPost && <ShowPost data={userPost} />} */}
       </Card>
     </>
   )
