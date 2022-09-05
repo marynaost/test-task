@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import * as API from 'services/api'
-import ShowPost from 'components/ShowPost'
+// import ShowPost from 'components/ShowPost'
 
-export default function UserCardItem({ id, name, email, phone }) {
+export default function UserCardItem({ id, name, email, phone, onChange }) {
   const [userPost, setUserPost] = useState([])
   const [showPost, setShowPost] = useState(false)
 
@@ -16,8 +16,9 @@ export default function UserCardItem({ id, name, email, phone }) {
       .catch(err => console.log(err))
   }, [id])
 
-  const handleClick = e => {
+  const handleClick = () => {
     setShowPost(!showPost)
+    // onChange(showPost, userPost)
   }
 
   return (
@@ -27,10 +28,16 @@ export default function UserCardItem({ id, name, email, phone }) {
         <p>{email}</p>
         <p>{phone.split(' ')[0]}</p>
         <p>{phone.split(' ')[1]}</p>
-        <Button type="button" onClick={handleClick}>
+        <Button
+          type="button"
+          onClick={async () => {
+            handleClick()
+            onChange(!showPost, userPost)
+          }}
+        >
           {showPost ? 'Hide posts' : 'Show all posts '}
         </Button>
-        {showPost && <ShowPost data={userPost} />}
+        {/* {showPost && <ShowPost data={userPost} />} */}
       </Card>
     </>
   )

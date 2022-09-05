@@ -1,12 +1,27 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import UserCardItem from './UserCardItem'
+import ShowPost from 'components/ShowPost'
 
 export default function UserCard({
   firstContentIndex,
   lastContentIndex,
   users,
 }) {
+  const [show, setShow] = useState(null)
+  const [userPost, setUserPost] = useState([])
+
+  const handleChange = (showPost, userPost) => {
+    setShow(showPost)
+    setUserPost(userPost)
+  }
+  // const handleShow = () => {
+  //   setShow(!show)
+  // }
+
+  console.log(show)
+  console.log(userPost)
   return (
     <>
       {users && (
@@ -21,9 +36,11 @@ export default function UserCard({
                   name={name}
                   email={email}
                   phone={phone}
+                  onChange={handleChange}
                 />
               ))}
           </ListUsers>
+          {show && <ShowPost data={userPost} />}
         </UsersWrap>
       )}
     </>
@@ -31,7 +48,11 @@ export default function UserCard({
 }
 
 const UsersWrap = styled.div`
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: center;
 `
 
 const ListUsers = styled.ul`

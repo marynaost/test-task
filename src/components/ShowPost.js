@@ -18,11 +18,12 @@ export default function ShowPost({ data, ...props }) {
   )
 }
 const Wrap = styled.div`
-  position: absolute;
+  /* position: absolute; */
   background: #333348;
   border-radius: 40px;
-  right: 0;
-  top: 0;
+  /* right: 0; */
+  /* top: 0; */
+  margin-left: auto;
   overflow: hidden;
   @media screen and (min-width: 768px) {
     width: 300px;
